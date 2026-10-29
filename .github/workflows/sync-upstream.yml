@@ -22,24 +22,13 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Fetch upstream
+      - name: Merge upstream/main
         run: |
           git remote add upstream https://github.com/byoungd/up.git
           git fetch upstream main
-
-      - name: Mirror to upstream/main
-        id: sync
-        run: |
-          upstream_sha="$(git rev-parse upstream/main)"
-          local_sha="$(git rev-parse HEAD)"
-          echo "upstream=$upstream_sha local=$local_sha"
-          git reset --hard "$upstream_sha"
-          if [ "$upstream_sha" = "$local_sha" ]; then
-            echo "changed=false" >> "$GITHUB_OUTPUT"
-          else
-            echo "changed=true" >> "$GITHUB_OUTPUT"
-          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git merge upstream/main --no-edit
 
       - name: Push
-        if: steps.sync.outputs.changed == 'true'
-        run: git push --force-with-lease origin main
+        run: git push origin main
