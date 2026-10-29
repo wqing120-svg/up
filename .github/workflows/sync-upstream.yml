@@ -1,0 +1,45 @@
+name: Sync with upstream
+
+on:
+  schedule:
+    # 每天 09:17 / 21:17（北京时间，UTC+8）
+    - cron: '17 1,13 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-upstream
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout fork
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Fetch upstream
+        run: |
+          git remote add upstream https://github.com/byoungd/up.git
+          git fetch upstream main
+
+      - name: Mirror to upstream/main
+        id: sync
+        run: |
+          upstream_sha="$(git rev-parse upstream/main)"
+          local_sha="$(git rev-parse HEAD)"
+          echo "upstream=$upstream_sha local=$local_sha"
+          git reset --hard "$upstream_sha"
+          if [ "$upstream_sha" = "$local_sha" ]; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Push
+        if: steps.sync.outputs.changed == 'true'
+        run: git push --force-with-lease origin main
