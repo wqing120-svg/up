@@ -204,8 +204,8 @@ AI 可以降低探索、学习和创造的门槛，却不能替你建立信誉�
 
 <div class="latest-updates">
   <figure class="latest-update">
-    <img src="./assets/latest/single-again.webp" alt="韩先凯与伴侣的合影" width="1000" height="1402" loading="lazy" decoding="async" fetchpriority="low" />
-    <figcaption><strong>重新相信相遇</strong>经历关系结束、恢复与重新整理生活之后，韩先凯开启了一段新的恋情。重新开始不会抹去过去，但它证明生活仍然能够向前生长。</figcaption>
+    <img src="./assets/latest/fourth-marriage.webp" alt="韩先凯与伴侣在第四次婚礼上的合影" width="1320" height="1642" loading="lazy" decoding="async" fetchpriority="low" />
+    <figcaption><strong>四婚婚礼合影</strong>这张照片记录了韩先凯的第四次婚礼。爱情与婚姻的感悟：爱不只是一时的心动，也是在日常里持续选择、尊重、承担与共同成长。</figcaption>
   </figure>
   <figure class="latest-update">
     <img class="latest-update-visit-photo" src="./assets/latest/current-qwen.jpg" alt="韩先凯在阿里巴巴参观千问大模型展示" width="1706" height="1279" loading="lazy" decoding="async" fetchpriority="low" />
